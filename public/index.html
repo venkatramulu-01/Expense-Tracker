@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <!-- Login Form -->
+            <div class="form login-form active" id="loginForm">
+                <h2>Login</h2>
+                <form id="loginFormElement">
+                    <div class="input-group">
+                        <input type="email" id="loginEmail" required>
+                        <label for="loginEmail">Email or Username</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" required>
+                        <label for="loginPassword">Password</label>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="form-switch">
+                        Don't have an account? <span onclick="switchToSignup()">Sign up</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Enhanced Signup Form - Step 1 -->
+            <div class="form signup-form" id="signupForm">
+                <h2>Create Account</h2>
+                <p class="step-indicator">Step 1 of 3: Basic Information</p>
+                <form id="signupFormElement">
+                    <div class="input-group">
+                        <input type="text" id="signupName" required>
+                        <label for="signupName">Full Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="signupEmail" required>
+                        <label for="signupEmail">Gmail Address</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="signupUsername" required>
+                        <label for="signupUsername">Username</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="signupMobile" required maxlength="10">
+                        <label for="signupMobile">Mobile Number</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="signupPassword" required>
+                        <label for="signupPassword">Password</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="confirmPassword" required>
+                        <label for="confirmPassword">Confirm Password</label>
+                    </div>
+                    
+                    <!-- Enhanced Captcha -->
+                    <div class="captcha-container">
+                        <label class="captcha-label">Security Verification</label>
+                        <div class="captcha-box">
+                            <div>
+                                <span id="captchaText">LOADING...</span>
+                            </div>
+                            <button type="button" id="refreshCaptcha" title="Refresh Captcha">🔄</button>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="captchaInput" required autocomplete="off">
+                            <label for="captchaInput">Enter the code shown above</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Continue to Security Questions</button>
+                    <div class="form-switch">
+                        Already have an account? <span onclick="switchToLogin()">Login</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Security Questions Form - Step 2 -->
+            <div class="form security-form" id="securityForm">
+                <h2>Security Questions</h2>
+                <p class="step-indicator">Step 2 of 3: Security Setup</p>
+                <form id="securityFormElement">
+                    <div class="input-group">
+                        <select id="question1" required>
+                            <option value="">Choose Security Question 1</option>
+                            <option value="pet">What was your first pet's name?</option>
+                            <option value="school">What elementary school did you attend?</option>
+                            <option value="mother">What is your mother's maiden name?</option>
+                            <option value="city">In what city were you born?</option>
+                            <option value="friend">What is your best friend's name?</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="answer1" required>
+                        <label for="answer1">Your Answer</label>
+                    </div>
+
+                    <div class="input-group">
+                        <select id="question2" required>
+                            <option value="">Choose Security Question 2</option>
+                            <option value="food">What is your favorite food?</option>
+                            <option value="teacher">Who was your favorite teacher?</option>
+                            <option value="book">What is your favorite book?</option>
+                            <option value="movie">What is your favorite movie?</option>
+                            <option value="color">What is your favorite color?</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="answer2" required>
+                        <label for="answer2">Your Answer</label>
+                    </div>
+
+                    <button type="submit" class="btn">Continue to OTP Verification</button>
+                    <div class="form-switch">
+                        <span onclick="backToSignup()">← Back to Registration</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- OTP Verification Form - Step 3 -->
+            <div class="form otp-form" id="otpForm">
+                <h2>Verify Your Email</h2>
+                <p class="step-indicator">Step 3 of 3: Email Verification</p>
+                <div class="otp-info">
+                    <p>We've sent a 6-digit OTP to:</p>
+                    <p id="otpEmail" class="highlight">your-email@gmail.com</p>
+                    <p><small>Check your console for the OTP code (testing mode)</small></p>
+                </div>
+                <form id="otpFormElement">
+                    <div class="otp-container">
+                        <input type="text" id="otp1" maxlength="1" class="otp-input">
+                        <input type="text" id="otp2" maxlength="1" class="otp-input">
+                        <input type="text" id="otp3" maxlength="1" class="otp-input">
+                        <input type="text" id="otp4" maxlength="1" class="otp-input">
+                        <input type="text" id="otp5" maxlength="1" class="otp-input">
+                        <input type="text" id="otp6" maxlength="1" class="otp-input">
+                    </div>
+                    
+                    <button type="submit" class="btn">Verify & Complete Registration</button>
+                    
+                    <div class="otp-actions">
+                        <span onclick="resendOTP()" class="link">Resend OTP</span>
+                        <span onclick="backToSecurity()" class="link">← Back to Security Questions</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+    <script src="script.js"></script>
+</body>
+</html>
